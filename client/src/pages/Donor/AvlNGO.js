@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table, Container } from "react-bootstrap";
 import NavBar from "./NavBar";
+import Donate from "./Donate";
 
 export default function AvlNGO() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const setModalIsOpenToTrue = () => {
+    setModalIsOpen(true);
+  };
+
+
   return (
     <>
       <NavBar></NavBar>
@@ -10,8 +18,13 @@ export default function AvlNGO() {
         <h1 className="mb-3 fs-3 fw-normal text-center ">
           List of Available NGOs
         </h1>
-        <Table striped bordered hover variant="dark">
-          <thead className='text-center'>
+        <Table
+          striped
+          bordered
+          hover
+          variant="dark"
+        >
+          <thead className="text-center">
             <tr>
               <th>#</th>
               <th>NGO Name</th>
@@ -32,6 +45,9 @@ export default function AvlNGO() {
                 voluntary group or institution with a social mission, which
                 operates independently from the government
               </td>
+              <td>
+                <button disabled="true">Donate</button>
+              </td>
             </tr>
             <tr>
               <td>2</td>
@@ -42,6 +58,11 @@ export default function AvlNGO() {
               <td>
                 voluntary group or institution with a social mission, which
                 operates independently from the government
+              </td>
+              <td  setModalIsOpen={setModalIsOpen}>
+                <Donate show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
+                  <button onClick={setModalIsOpenToTrue}>Donate</button>
+                </Donate>
               </td>
             </tr>
             <tr>

@@ -1,5 +1,4 @@
 import React,{ useEffect,useState } from 'react'
-import image from "../../assets/oneee.jpg";
 import { Card, Container } from "react-bootstrap";
 import { tokenAddress } from '../../constants';
 import { ethers } from 'ethers'

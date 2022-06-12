@@ -62,9 +62,9 @@ function Hero() {
           <Card.Img variant="top" src="Ashritha.jpg" />
           <Card.Body>
             <Card.Title>Ashritha R Murthy</Card.Title>
-            <Card.Text>
+            {/* <Card.Text>
               Bonjour.
-            </Card.Text>
+            </Card.Text> */}
           </Card.Body>
         </Card>
       </div>
@@ -75,18 +75,18 @@ function Hero() {
           <Card.Img variant="top" src="anu.jpg" />
           <Card.Body>
             <Card.Title>Anushree B</Card.Title>
-            <Card.Text>
+            {/* <Card.Text>
               Hola.
-            </Card.Text>
+            </Card.Text> */}
           </Card.Body>
         </Card>
         <Card style={{ width: '16rem' }}>
           <Card.Img variant="top" src="gowry.jpg" />
           <Card.Body>
             <Card.Title>Gowry A V</Card.Title>
-            <Card.Text>
+            {/* <Card.Text>
               Hi.
-            </Card.Text>
+            </Card.Text> */}
           </Card.Body>
         </Card>
       </div>
@@ -96,18 +96,18 @@ function Hero() {
           <Card.Img variant="top" src="lavanya.jpg" />
           <Card.Body>
             <Card.Title>Lavanya A M</Card.Title>
-            <Card.Text>
+            {/* <Card.Text>
               Hey.
-            </Card.Text>
+            </Card.Text> */}
           </Card.Body>
         </Card>
         <Card style={{ width: '16rem' }}>
           <Card.Img variant="top" src="yuki.jpg" />
           <Card.Body>
             <Card.Title>Yuktha N</Card.Title>
-            <Card.Text>
+            {/* <Card.Text>
               Hello.
-            </Card.Text>
+            </Card.Text> */}
           </Card.Body>
         </Card>
       </div>

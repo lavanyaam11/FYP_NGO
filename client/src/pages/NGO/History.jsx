@@ -1,6 +1,6 @@
 import React from 'react'
 import { Table, Container, Button } from "react-bootstrap";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import NavBar from "./NavBar";
 import { tokenAddress } from '../../constants';
 import { ethers } from 'ethers'
@@ -23,7 +23,7 @@ export default function History() {
           }
         }    
     }
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     return (
         <>
             <NavBar></NavBar>
