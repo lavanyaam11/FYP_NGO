@@ -19,6 +19,7 @@ export default function AvlNGO() {
               <th>Cause Name</th>
               <th>Amount Required</th>
               <th>Description</th>
+              <th>DOnate Here</th>
             </tr>
           </thead>
           <tbody>
@@ -32,6 +33,9 @@ export default function AvlNGO() {
                 voluntary group or institution with a social mission, which
                 operates independently from the government
               </td>
+              <td>
+                <button disabled={true}>Donate</button>
+              </td>
             </tr>
             <tr>
               <td>2</td>
@@ -43,6 +47,7 @@ export default function AvlNGO() {
                 voluntary group or institution with a social mission, which
                 operates independently from the government
               </td>
+              <button disabled={false} onClick={()=>{console.log('Give India Foundation')}}>Donate</button>
             </tr>
             <tr>
               <td>3</td>
