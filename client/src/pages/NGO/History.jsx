@@ -15,8 +15,8 @@ export default function History() {
           const contract = new ethers.Contract(tokenAddress, donation.abi, signer)
           try {
               console.log("Hi")
-              for(let i = 0; i<6; i++){
-            const data = await contract.requests(i);
+              for(let i = 0; i<2; i++){
+            const data = await contract.histroy(i);
             console.log('data: ', data)}
           } catch (err) {
             console.log("Error: ", err)

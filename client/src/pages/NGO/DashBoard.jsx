@@ -33,16 +33,17 @@ export default function DashBoard() {
         {listOfRequest.map((eachRequest,index)=>{
           if(index%2 === 0) {
           return (
-            <Card style={{ width: "20rem", height: "18rem" }} className="m-2 bd-highlight"
+            <Card style={{ width: "20rem", height: "21.5rem"}} className="m-2 bd-highlight"
             key={index}>
           <Card.Body>
             <Card.Img variant="top" src="oneee.jpg" />
-            <Card.Title>{eachRequest[2]}</Card.Title>
+            <Card.Title>Organization Name: {eachRequest[0]}</Card.Title>
+            <Card.Text>Cause: {eachRequest[2]}</Card.Text>
             <Card.Text>
-              {eachRequest[3]}
+              Description: {eachRequest[3]}
             </Card.Text>
             <Card.Text>
-              {parseInt(eachRequest[4])}
+              Amount Required: {parseInt(eachRequest[4])}
             </Card.Text>
           </Card.Body>
         </Card>

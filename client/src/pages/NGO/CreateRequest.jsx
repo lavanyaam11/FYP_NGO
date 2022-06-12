@@ -22,14 +22,11 @@ export default function CreateRequest() {
         e.preventDefault()
         if (typeof window.ethereum !== 'undefined') {
           await requestAccount()
-          console.log("hi")
           const provider = new ethers.providers.Web3Provider(window.ethereum);
           const signer = provider.getSigner();
           const contract = new ethers.Contract(tokenAddress, donation.abi, signer);
-          console.log(amount);
           const transaction = await contract.createNewRequest(orgName,orgAdsress, causeName, causeDescription, amount);
           await transaction.wait();
-          console.log(`${amount} Coins successfully sent to ${orgAdsress}`);
         }
       }
 
