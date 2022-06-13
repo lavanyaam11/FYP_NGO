@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Table, Container } from "react-bootstrap";
 import NavBar from "./NavBar";
 import Donate from "./Donate";
+import {getRequest} from '../../utils/Ngo'
 
 export default function AvlNGO() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setmodalisopen] = useState(false);
+  const [selectedOrg, setSelectedOrg] = useState("");
+  const [selectedCauseName, setSelectedCauseName] = useState("");
+  const [listOfRequest, setListOfRequest] = useState([]);
+  useEffect(()=>{
+    getRequest(setListOfRequest)
+  },[])
 
-  const setModalIsOpenToTrue = () => {
-    setModalIsOpen(true);
+  const setModalIsOpenToTrue = (orgName,causeName) => {
+    setSelectedOrg(orgName);
+    setSelectedCauseName(causeName);
+    setmodalisopen(true);
   };
-
-
   return (
     <>
       <NavBar></NavBar>
@@ -26,100 +33,35 @@ export default function AvlNGO() {
         >
           <thead className="text-center">
             <tr>
-              <th>#</th>
               <th>NGO Name</th>
               <th>Wallet Address</th>
               <th>Cause Name</th>
-              <th>Amount Required</th>
               <th>Description</th>
+              <th>Amount Requested</th>
+              <th>Amount Collected</th>
               <th>Donate</th>
             </tr>
           </thead>
           <tbody>
+          {listOfRequest.map((eachRequest,index)=>{
+          if(index%2 === 0) {
+            const org = eachRequest[0];
+            const cause = eachRequest[2];
+            return(
             <tr>
-              <td>1</td>
-              <td>Smile Foundation</td>
-              <td>wert234shjitjk</td>
-              <td>Education</td>
-              <td>140 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
+              <td>{eachRequest[0]}</td>
+              <td>{eachRequest[1]}</td>
+              <td>{eachRequest[2]}</td>
+              <td>{eachRequest[3]}</td>
+              <td>{parseInt(eachRequest[4])}</td>
+              <td>{parseInt(eachRequest[5])}</td>
+              <td  setModalIsOpen={setmodalisopen}>
+              <button onClick={()=>setModalIsOpenToTrue(org,cause)}>Donate</button>
+              <Donate show={modalIsOpen} onHide={() => setmodalisopen(false)}orgname={selectedOrg} causename={selectedCauseName}/>
               </td>
-              <td>
-                <button disabled="true">Donate</button>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Give India Foundation</td>
-              <td>1wcfgmjksldjun</td>
-              <td>Covid-19</td>
-              <td>180 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td  setModalIsOpen={setModalIsOpen}>
-              <button onClick={setModalIsOpenToTrue}>Donate</button>
-              <Donate show={modalIsOpen} onHide={() => setModalIsOpen(false)}/>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Care India</td>
-              <td>carpoytg567vfrt</td>
-              <td>Girl Eduaction</td>
-              <td>150 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Smile Foundation</td>
-              <td>wert234shjitjk</td>
-              <td>Education</td>
-              <td>140 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Give India Foundation</td>
-              <td>1wcfgmjksldjun</td>
-              <td>Covid-19</td>
-              <td>180 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>Care India</td>
-              <td>carpoytg567vfrt</td>
-              <td>Girl Eduaction</td>
-              <td>150 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>Smile Foundation</td>
-              <td>wert234shjitjk</td>
-              <td>Education</td>
-              <td>140 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-            </tr>
+            </tr>)
+          }else{
+            return(null)}})}
           </tbody>
         </Table>
       </Container>

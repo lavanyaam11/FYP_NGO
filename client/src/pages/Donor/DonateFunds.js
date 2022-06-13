@@ -35,7 +35,7 @@ function DonateFunds() {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
   }
 
-  const donate = async ({ setError, setTxs, ether, addr }) => {
+  const donate = async () => {
     try {
       if (!window.ethereum)
         throw new Error("No crypto wallet found. Please install it.");

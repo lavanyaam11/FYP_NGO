@@ -1,29 +1,15 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import { Table, Container, Button } from "react-bootstrap";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import NavBar from "./NavBar";
-import { tokenAddress } from '../../constants';
-import { ethers } from 'ethers'
-import donation from '../../artifacts/contracts/DonationToOrganization.sol/DonationToOrganization.json'
+import {getHistory} from '../../utils/Ngo';
 
 export default function History() {
-
-    async function fetchGreeting() {
-        if (typeof window.ethereum !== 'undefined') {
-          const provider = new ethers.providers.Web3Provider(window.ethereum)
-          const signer = provider.getSigner();
-          const contract = new ethers.Contract(tokenAddress, donation.abi, signer)
-          try {
-              console.log("Hi")
-              for(let i = 0; i<2; i++){
-            const data = await contract.histroy(i);
-            console.log('data: ', data)}
-          } catch (err) {
-            console.log("Error: ", err)
-          }
-        }    
-    }
-    // const navigate = useNavigate()
+    const [listOfDonationHistroy, setListOfDonationHistroy] = useState([]);
+    useEffect(()=>{
+        getHistory(setListOfDonationHistroy)
+    },[]);
+    const navigate = useNavigate()
     return (
         <>
             <NavBar></NavBar>
@@ -31,7 +17,7 @@ export default function History() {
                 <h1 className="mb-3 fs-3 fw-normal text-center ">
                     History
                 </h1>
-                <Button variant="danger" type="danger" onClick={fetchGreeting} size="lg">
+                <Button variant="danger" type="danger" onClick={()=>navigate('/ngo')} size="lg">
                     Back
                 </Button>
             </div>
@@ -39,126 +25,26 @@ export default function History() {
                 <Table striped bordered hover variant="dark">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>NGO Name</th>
-                            <th>Wallet Address</th>
                             <th>Cause Name</th>
+                            <th>Donor Address</th>
                             <th>Amount Donated</th>
-                            <th>Amount Collected</th>
-                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Smile Foundation</td>
-                            <td>wert234shjitjk</td>
-                            <td>Education</td>
-                            <td>120 Ether</td>
-                            <td>120 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Give India Foundation</td>
-                            <td>1wcfgmjksldjun</td>
-                            <td>Covid-19</td>
-                            <td>130 Ether</td>
-                            <td>130 Ether</td>
-                            <td>Inavtive</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Care India</td>
-                            <td>carpoytg567vfrt</td>
-                            <td>Girl Eduaction</td>
-                            <td>100 Ether</td>
-                            <td>100 Ether</td>
-                            <td>Active</td>
-                        </tr>
-
-
+                    {listOfDonationHistroy.map((eachRequest,index)=>{
+          if(index%2 === 0) {
+            const org = eachRequest[0];
+            const cause = eachRequest[2];
+            return(
+            <tr>
+              <td>{eachRequest[0]}</td>
+              <td>{eachRequest[1]}</td>
+              <td>{eachRequest[2]}</td>
+              <td>{parseInt(eachRequest[3])/1000000000000000000}</td>
+            </tr>)
+          }else{
+            return(null)}})}
                     </tbody>
                 </Table>
             </Container>

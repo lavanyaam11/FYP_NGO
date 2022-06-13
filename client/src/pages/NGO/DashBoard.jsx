@@ -1,29 +1,11 @@
 import React,{ useEffect,useState } from 'react'
 import { Card, Container } from "react-bootstrap";
-import { tokenAddress } from '../../constants';
-import { ethers } from 'ethers'
-import donation from '../../artifacts/contracts/DonationToOrganization.sol/DonationToOrganization.json'
+import {getRequest} from '../../utils/Ngo'
 
 export default function DashBoard() {
   const [listOfRequest, setListOfRequest] = useState([]);
-  const len = 7;
-  const getRequest = async() =>{
-    if (typeof window.ethereum !== 'undefined') {
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(tokenAddress, donation.abi, signer)
-      try {
-        for(let i = 0; i<len; i++){
-          const data = await contract.requests(i);
-          setListOfRequest(prev=>[...prev,data])
-        }
-      } catch (err) {
-        console.log("Error: ", err)
-      }
-    }
-  }
   useEffect(()=>{
-    getRequest()
+    getRequest(setListOfRequest)
   },[])
   return (
     <>

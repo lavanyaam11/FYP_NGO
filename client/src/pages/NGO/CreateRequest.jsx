@@ -2,9 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from './NavBar'
 import { Form, Row, Col, Button, Container } from 'react-bootstrap'
-import { tokenAddress } from '../../constants';
-import { ethers } from 'ethers'
-import donation from '../../artifacts/contracts/DonationToOrganization.sol/DonationToOrganization.json'
+import {createNewRequest} from '../../utils/Ngo'
 
 export default function CreateRequest() {
     const navigate = useNavigate()
@@ -14,22 +12,11 @@ export default function CreateRequest() {
     const [causeDescription, setCauseDescription] = React.useState()
     const [amount, setAmount] = React.useState(0)
 
-    async function requestAccount() {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-      }
-
-    async function createNewRequest(e) {
-        e.preventDefault()
-        if (typeof window.ethereum !== 'undefined') {
-          await requestAccount()
-          const provider = new ethers.providers.Web3Provider(window.ethereum);
-          const signer = provider.getSigner();
-          const contract = new ethers.Contract(tokenAddress, donation.abi, signer);
-          const transaction = await contract.createNewRequest(orgName,orgAdsress, causeName, causeDescription, amount);
-          await transaction.wait();
-        }
-      }
-
+    const onSubmit = async(e) =>{
+        e.preventDefault();
+        await createNewRequest(orgName,orgAdsress, causeName, causeDescription, amount);
+        navigate('/ngo')
+    }
     return (
         <div>
             <NavBar />
@@ -79,7 +66,7 @@ export default function CreateRequest() {
                     <br/>
                     <br/>
                     <div className='d-flex justify-content-lg-between'>
-                        <Button variant="success" type="success" onClick={createNewRequest}>
+                        <Button variant="success" type="success" onClick={onSubmit}>
                             Create Request
                         </Button>
                         
