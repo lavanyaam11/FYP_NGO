@@ -32,6 +32,7 @@ export default function AvlNGO() {
               <th>Cause Name</th>
               <th>Amount Required</th>
               <th>Description</th>
+              <th>Donate</th>
             </tr>
           </thead>
           <tbody>
@@ -60,9 +61,8 @@ export default function AvlNGO() {
                 operates independently from the government
               </td>
               <td  setModalIsOpen={setModalIsOpen}>
-                <Donate show={modalIsOpen} onHide={() => setModalIsOpen(false)}>
-                  <button onClick={setModalIsOpenToTrue}>Donate</button>
-                </Donate>
+              <button onClick={setModalIsOpenToTrue}>Donate</button>
+              <Donate show={modalIsOpen} onHide={() => setModalIsOpen(false)}/>
               </td>
             </tr>
             <tr>
