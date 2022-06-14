@@ -12,6 +12,7 @@ export default function DashBoard() {
       <Container>
       <h1 className="mb-3 fs-3 fw-normal text-center ">Active Request</h1>
       <div className="d-flex bd-highlight justify-content-sm-center flex-wrap">
+        {listOfRequest.length === 0 && <p>No active Request :(</p>}
         {listOfRequest.map((eachRequest,index)=>{
           if(index%2 === 0) {
           return (

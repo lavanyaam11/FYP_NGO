@@ -10,7 +10,7 @@ export default function NGO() {
     <div>
       <NavBar setModalShow={setModalShow}/>
       <NGOProfile show={modalShow} onHide={() => setModalShow(false)} />
-      <DashBoard />
+      <DashBoard  />
     </div>
   )
 }

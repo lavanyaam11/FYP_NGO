@@ -2,9 +2,8 @@ import { tokenAddress } from '../constants';
 import { ethers } from 'ethers'
 import donation from '../artifacts/contracts/DonationToOrganization.sol/DonationToOrganization.json';
 
-let numberOfRequest;
-let numberOfDonation = 20;
-numberOfRequest = 5;
+let numberOfDonation = parseInt(localStorage.getItem('numberOfDonation') || 0);
+let numberOfRequest= parseInt(localStorage.getItem('numberOfRequest') || 0);
 async function requestAccount() {
   await window.ethereum.request({ method: 'eth_requestAccounts' });
 }
@@ -20,7 +19,7 @@ export async function donateFund(orgName, causeName, amount) {
     const transaction = await contract.donate(orgName, causeName, options);
     await transaction.wait();
     window.location.reload();
-    numberOfDonation+=1;
+    localStorage.setItem('numberOfDonation',parseInt(numberOfDonation)+1)
     console.log(` Donated successfully sent!!!`);
   }
 }
@@ -49,7 +48,7 @@ export async function createNewRequest(orgName, orgAdsress, causeName, causeDesc
     const contract = new ethers.Contract(tokenAddress, donation.abi, signer);
     const transaction = await contract.createNewRequest(orgName, orgAdsress, causeName, causeDescription, amount);
     await transaction.wait();
-    numberOfRequest += 1;
+    localStorage.setItem('numberOfRequest',parseInt(numberOfRequest)+1)
   }
 };
 
