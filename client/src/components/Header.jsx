@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Navbar, Container, Dropdown, Button } from 'react-bootstrap';
 import { useLocation } from "react-router-dom";
 import logo from '../assets/gec.jpeg'
@@ -6,6 +6,7 @@ import logo from '../assets/gec.jpeg'
 export default function Header(props) {
     let history = useLocation();
     let { pathname } = history;
+    
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -25,8 +26,16 @@ export default function Header(props) {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#" onClick={() => props.setModalShow(true)}>NGO</Dropdown.Item>
-                        <Dropdown.Item href="#"onClick={() => props.setModalDonor(true)}>Donor</Dropdown.Item>
+                        <Dropdown.Item href="#" 
+                        onClick={() => {
+                            props.setModalShow(true);
+                            props.setIsNgo(true);
+                        }}
+                        >NGO</Dropdown.Item>
+                        <Dropdown.Item href="#"onClick={() => {
+                            props.setModalDonor(true)
+                            props.setIsNgo(false)
+                        }}>Donor</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>}
                 {pathname !=='/' && pathname !=='/donorRegistration' && pathname !== '/ngoRegistration' && <Button variant='danger'>Log Out</Button>}

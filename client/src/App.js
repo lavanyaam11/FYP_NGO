@@ -1,6 +1,5 @@
-import React,{ useState,useEffect }  from 'react'
+import React,{ useState }  from 'react'
 import { BrowserRouter ,Routes , Route } from 'react-router-dom';
-import useLocalStorageState from 'use-local-storage-state'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './components/Footer';
 import NGOSignUp from './components/NGOSignUp'
@@ -15,15 +14,21 @@ import HistoryOfDonation from './pages/Donor/HistoryOfDonation';
 import History from './pages/NGO/History';
 import CreateRequest from './pages/NGO/CreateRequest';
 import './App.css'
+import { register,login,logout,checkIsUserLogged } from './utils/Auth'
 
 function App() {
+  // register()
+  // login()
+  // logout();
+  // checkIsUserLogged();
+  const [isNgo, setIsNgo] = useState();
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Hero />}/>
-          <Route path='/ngoRegistration' element={<NGOSignUp />}/>
-          <Route path='/donorRegistration' element={<DonorSignUp />}/>
+          <Route path='/' element={<Hero isNgo={isNgo} setIsNgo={setIsNgo} />}/>
+          <Route path='/ngoRegistration' element={<NGOSignUp isNgo={isNgo} />}/>
+          <Route path='/donorRegistration' element={<DonorSignUp isNgo={isNgo} />}/>
           <Route path='/ngo' element={<NGO />}/>
           <Route path='/createrequest' element={<CreateRequest />}/>
           <Route path='/ngohistory' element={<History />}/>

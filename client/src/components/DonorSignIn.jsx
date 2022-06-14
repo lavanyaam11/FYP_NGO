@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Modal } from "react-bootstrap";
+import { login } from '../utils/Auth'
 
 export default function DonorSignIn(props) {
-  const [walletAddress, setWalletAddress] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
   const onClickHandler = () => {
@@ -12,35 +12,17 @@ export default function DonorSignIn(props) {
     props.onHide();
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async(e) => {
     e.preventDefault();
-    const user = {
-      walletAddress,
-      password,
-    };
-    if (walletAddress && password) {
-      axios
-        .post("http://localhost:5000/LoginDonor", user)
-        .then((res) => {
-            navigate("/donorHomePage");
-            props.onHide();
-        })
-        .catch((e) => {
-          alert("Invaid username or password")
-          navigate("/");
-        })
-        .finally(() => {
-          setWalletAddress("");
-          setPassword("");
-        });
-    } else {
-        navigate("/");
-        alert("invalid input");
-        setWalletAddress("");
-        setPassword("");
+    const loggedIn = await login(password);
+    if(loggedIn){
+        navigate('/donorHomePage');
+        setPassword('')
+    }else{
+        alert("Invalid Credentials")
+        navigate('/')
     }
-  };
-
+}
   return (
     <Modal
       {...props}
@@ -55,16 +37,6 @@ export default function DonorSignIn(props) {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="formBasicWallet">
-            <Form.Label>Wallet address</Form.Label>
-            <Form.Control
-              type="text"
-              value={walletAddress}
-              onChange={(e) => setWalletAddress(e.target.value)}
-              placeholder="Enter your wallet address"
-            />
-          </Form.Group>
-
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control

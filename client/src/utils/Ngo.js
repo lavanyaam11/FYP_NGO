@@ -4,6 +4,7 @@ import donation from '../artifacts/contracts/DonationToOrganization.sol/Donation
 
 let numberOfDonation = parseInt(localStorage.getItem('numberOfDonation') || 0);
 let numberOfRequest= parseInt(localStorage.getItem('numberOfRequest') || 0);
+
 async function requestAccount() {
   await window.ethereum.request({ method: 'eth_requestAccounts' });
 }

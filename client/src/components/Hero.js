@@ -5,14 +5,15 @@ import Header from './Header';
 import NGOSignIn from './NGOSignIn';
 import DonorSignIn from './DonorSignIn';
 
-function Hero() {
+function Hero({isNgo,setIsNgo}) {
   const [modalShow, setModalShow] = useState(false);
   const [modalDonor, setModalDonor] = useState(false);
   return (
     <>
-      <Header setModalShow={setModalShow} setModalDonor={setModalDonor}/>
+      <Header setModalShow={setModalShow} setModalDonor={setModalDonor} setIsNgo={setIsNgo}/>
       <NGOSignIn
         show={modalShow}
+        isNgo={isNgo}
         onHide={() => setModalShow(false)} />
       <DonorSignIn
         show={modalDonor}

@@ -3,11 +3,10 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import { Container, Form, Button } from 'react-bootstrap';
 import Header from './Header';
+import { register } from '../utils/Auth'
 
-export default function NGOSignUp() {
+export default function NGOSignUp({isNgo}) {
     const [orgName, setOrgName] = useState("");
-    const [owner, setOwnerName] = useState("");
-    const [aadhar, setAdhaar] = useState("");
     const [certificate, setCertificate] = useState("");
     const [orgAddress, setWallet] = useState("");
     const [password, setPassword] = useState("");
@@ -15,35 +14,15 @@ export default function NGOSignUp() {
 
     const navigate = useNavigate();
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async(e) => {
         e.preventDefault();
-
-        const user ={
-            orgName,
-            owner,
-            aadhar,
-            certificate,
-            orgAddress,
-            password
+        try{
+            await register(orgAddress,orgName,password,certificate,isNgo);
+            navigate('/')
+        }catch{
+            alert("Registration failed");
+            navigate('/')
         }
-
-        if(confirmPassword === password){
-
-            if (orgName && owner && aadhar && certificate && orgAddress && password) {
-                axios.post("http://localhost:5000/RegisterNGO", user)
-                    .then((res) => {console.log(res)
-                        alert("Registered Successfully,Please Login ")
-                        navigate('/');
-                    })
-            }
-            else {
-                alert("invalid input");
-            }
-        }else{
-            alert("Password didnt match");
-        }
-
-        
     }
         return (
             <>
@@ -57,16 +36,7 @@ export default function NGOSignUp() {
                             <Form.Control type="text" value={orgName} onChange={(e) => setOrgName(e.target.value)} placeholder="Enter your Organization" />
                         </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicOwner">
-                            <Form.Label>Owner Name</Form.Label>
-                            <Form.Control type="text" value={owner} onChange={(e) => setOwnerName(e.target.value)} placeholder="Enter Owner Name" />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3" controlId='formBasicId'>
-                            <Form.Label>Addhaar Number</Form.Label>
-                            <Form.Control type="text" value={aadhar} onChange={(e) => setAdhaar(e.target.value)} placeholder='Enter Addhaar Number' />
-                        </Form.Group>
-
+                    
                         <Form.Group className="mb-3" controlId='formBasicCerificate'>
                             <Form.Label>Certificate Number</Form.Label>
                             <Form.Control type="text" value={certificate} onChange={(e) => setCertificate(e.target.value)} placeholder='Enter Certificate Number' />

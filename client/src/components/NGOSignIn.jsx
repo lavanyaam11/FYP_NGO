@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import { Form, Button, Modal } from 'react-bootstrap'
+import { login } from '../utils/Auth'
 
 export default function NGOSignIn(props) {
-    const [orgAddress, setWallet] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
     const onClickHandler = () => {
@@ -12,32 +12,15 @@ export default function NGOSignIn(props) {
         props.onHide();
     }
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async(e) => {
         e.preventDefault();
-        const user = {
-            orgAddress,
-            password
-        }
-        if (orgAddress && password) {
-            axios.post("http://localhost:5000/LoginNGO", user)
-                .then((res) => {
-                    navigate('/ngo');
-                    props.onHide();
-
-                }).catch((e) => {
-                    alert("Invaid username or password")
-                    navigate('/')
-
-                }).finally(() => {
-                    setWallet("")
-                    setPassword("")
-                })
-        }
-        else {
+        const loggedIn = await login(password);
+        if(loggedIn){
+            navigate('/ngo');
+            setPassword('')
+        }else{
+            alert("Invalid Credentials")
             navigate('/')
-            alert("invalid input");
-            setWallet("")
-            setPassword("")
         }
     }
     return (
@@ -54,11 +37,6 @@ export default function NGOSignIn(props) {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Form.Group className="mb-3" controlId="formBasicWallet">
-                        <Form.Label>Wallet address</Form.Label>
-                        <Form.Control type="text" value={orgAddress} onChange={(e) => setWallet(e.target.value)} placeholder="Enter your wallet address" />
-                    </Form.Group>
-
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
