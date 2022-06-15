@@ -15,7 +15,7 @@ export default function NGOSignIn(props) {
     const onSubmitHandler = async(e) => {
         e.preventDefault();
        await login(password);
-            navigate('/ngo');
+            // navigate('/ngo');
             setPassword('')
     }
     return (

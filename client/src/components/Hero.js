@@ -10,7 +10,7 @@ function Hero({isNgo,setIsNgo}) {
   const [modalDonor, setModalDonor] = useState(false);
   return (
     <>
-      <Header setModalShow={setModalShow} setModalDonor={setModalDonor} setIsNgo={setIsNgo}/>
+      <Header setModalShow={setModalShow} setModalDonor={setModalDonor} setIsNgo={setIsNgo} isNgo= {isNgo} />
       <NGOSignIn
         show={modalShow}
         isNgo={isNgo}
