@@ -61,7 +61,7 @@ export default function NGOSignIn(props) {
         });
       });
   };
-  
+
   const accountChangeHandler = (account) => {
     // Setting an address data
     setdata({

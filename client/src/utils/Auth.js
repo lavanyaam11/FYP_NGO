@@ -14,12 +14,12 @@ export const register = async(address,name,password,idProof,isNgo) => {
 }
 
 export const login = async(password) => {
+    console.log("hi")
     const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(authTokenAddress, auth.abi,signer);
     const loginUser = await contract.login(account,password);
-    await loginUser.wait()
     console.log(loginUser)
 }
 
