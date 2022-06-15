@@ -14,14 +14,9 @@ export default function NGOSignIn(props) {
 
     const onSubmitHandler = async(e) => {
         e.preventDefault();
-        const loggedIn = await login(password);
-        if(loggedIn){
+       await login(password);
             navigate('/ngo');
             setPassword('')
-        }else{
-            alert("Invalid Credentials")
-            navigate('/')
-        }
     }
     return (
         <Modal

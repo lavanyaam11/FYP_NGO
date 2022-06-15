@@ -17,7 +17,8 @@ contract Auth {
         address _address,
         string memory _name,
         string memory _password,
-        string memory _identityProof
+        string memory _identityProof,
+        bool _isNGO
     ) public returns (bool) {
         require(user[_address].addr != msg.sender);
         user[_address].addr = _address;
@@ -25,6 +26,7 @@ contract Auth {
         user[_address].password = _password;
         user[_address].identityProof = _identityProof;
         user[_address].isUserLoggedIn = false;
+        user[_address].isNGO = _isNGO;
         return true;
     }
 

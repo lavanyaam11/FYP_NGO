@@ -78,6 +78,7 @@ contract NGO {
             });
 
             histroy.push(newHis);
+            requests[i].org_address.transfer(msg.value);
                 
             }
             //  require(requests[i].numberOfVoters > totalContributors / 2,"");
