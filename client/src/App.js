@@ -17,13 +17,12 @@ import { register,login,logout,checkIsNgo } from './utils/Auth'
 
 function App() {
   checkIsNgo();
-  const [isNgo, setIsNgo] = useState();
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Hero isNgo={isNgo} setIsNgo={setIsNgo} />}/>
-          <Route path='/ngoRegistration' element={<NGOSignUp isNgo={isNgo} />}/>
+          <Route path='/' element={<Hero />}/>
+          <Route path='/ngoRegistration' element={<NGOSignUp />}/>
           <Route path='/ngo' element={<NGO />}/>
           <Route path='/createrequest' element={<CreateRequest />}/>
           <Route path='/ngohistory' element={<History />}/>

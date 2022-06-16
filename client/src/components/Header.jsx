@@ -1,30 +1,41 @@
 import React, { useState } from "react";
 import { Navbar, Container, Dropdown, Button } from 'react-bootstrap';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from '../assets/gec.jpeg'
+import { checkIsNgo } from '../utils/Auth'
 
 export default function Header(props) {
     let history = useLocation();
+    const navigate = useNavigate();
     let { pathname } = history;
 
-    const {ethereum} = window
+    const { ethereum } = window
 
-    const [currentAccount, setCurrentAccount] = useState("");
-  
-    const connectWallet = async () => {
-      try {
-        if (!ethereum) return alert("Please install MetaMask.");
-  
-        const accounts = await ethereum.request({ method: "eth_requestAccounts", });
-  
-        setCurrentAccount(accounts[0]);
-      } catch (error) {
-        alert("Unable to connect to your account");
-      }
+    const connectNgoWallet = async () => {
+        try {
+            if (!ethereum) return alert("Please install MetaMask.");
+
+            const accounts = await ethereum.request({ method: "eth_requestAccounts", });
+            if (checkIsNgo()) {
+                navigate('/ngo');
+            } else {
+                alert("Your wallet is not yet registered as ngo")
+                navigate('/');
+            }
+        } catch (error) {
+            alert("Unable to connect to your account");
+        }
     };
-  
-  
-    console.log(currentAccount)
+    const connectDonorWallet = async () => {
+        try {
+            if (!ethereum) return alert("Please install MetaMask.");
+
+            const accounts = await ethereum.request({ method: "eth_requestAccounts", });
+            navigate('/donorHomePage');
+        } catch (error) {
+            alert("Unable to connect to your account");
+        }
+    };
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -46,16 +57,11 @@ export default function Header(props) {
                         <Dropdown.Menu>
                             <Dropdown.Item
                                 onClick={() => {
-                                    props.setModalShow(true);
-                                    props.setIsNgo(true);
-                                    // handleNgoLogin()
-                                    connectWallet()
+                                    connectNgoWallet()
                                 }}
                             >NGO</Dropdown.Item>
-                            <Dropdown.Item  onClick={() => {
-                                props.setModalDonor(true)
-                                props.setIsNgo(false)
-                                connectWallet()
+                            <Dropdown.Item onClick={() => {
+                                connectDonorWallet();
                             }}>Donor</Dropdown.Item>
                             <Dropdown.Item href="/ngoRegistration">Register Your NGO here</Dropdown.Item>
                         </Dropdown.Menu>
