@@ -1,6 +1,6 @@
 import { tokenAddress } from '../constants';
 import { ethers } from 'ethers'
-import donation from '../artifacts/contracts/DonationToOrganization.sol/DonationToOrganization.json';
+import donation from '../contracts/NGO.json';
 
 let numberOfDonation = parseInt(localStorage.getItem('numberOfDonation') || 0);
 let numberOfRequest= parseInt(localStorage.getItem('numberOfRequest') || 0);
@@ -47,9 +47,13 @@ export async function createNewRequest(orgName, orgAdsress, causeName, causeDesc
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(tokenAddress, donation.abi, signer);
+    try{
     const transaction = await contract.createNewRequest(orgName, orgAdsress, causeName, causeDescription, amount);
     await transaction.wait();
-    localStorage.setItem('numberOfRequest',parseInt(numberOfRequest)+1)
+    localStorage.setItem('numberOfRequest',parseInt(numberOfRequest)+1)}
+    catch{
+      alert("Please check your wallet address")
+    }
   }
 };
 

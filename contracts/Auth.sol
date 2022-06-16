@@ -40,10 +40,9 @@ contract Auth {
             keccak256(abi.encodePacked(_password))
         ) {
             user[_address].isUserLoggedIn = true;
-            return user[_address].isUserLoggedIn;
-        } else {
-            return false;
-        }
+        } 
+
+        return (user[_address].isUserLoggedIn);
     }
 
     // check the user logged In or not

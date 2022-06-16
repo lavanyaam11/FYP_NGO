@@ -17,10 +17,7 @@ import './App.css'
 import { register,login,logout,checkIsUserLogged } from './utils/Auth'
 
 function App() {
-  // register();
-  login()
-  // logout();
-  // checkIsUserLogged();
+
   const [isNgo, setIsNgo] = useState();
   return (
     <div className="App">

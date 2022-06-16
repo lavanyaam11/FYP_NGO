@@ -17,12 +17,12 @@ function DonorHomePage() {
       <div className="d-flex justify-content-around">
         <Card style={{ width: "20rem", height: "16rem" }}>
           <Card.Body>
-            <Card.Img variant="top" src="download.jpg" />
-            <Card.Title>Donate Funds</Card.Title>
-            {/* <Card.Text>Donate funds to your preferred NGO.</Card.Text> */}
+            <Card.Img variant="top" src="Ngo.jpg" />
+            <Card.Title>NGOs</Card.Title>
+            {/* <Card.Text>List of available NGOS.</Card.Text> */}
           </Card.Body>
           <Card.Footer>
-            <Card.Link href="/donateFunds">Click here</Card.Link>
+            <Card.Link href="/avlngo">Click here</Card.Link>
           </Card.Footer>
         </Card>
         <Card style={{ width: "20rem", height: "16rem" }}>
@@ -33,19 +33,6 @@ function DonorHomePage() {
           </Card.Body>
           <Card.Footer>
             <Card.Link href="/approveReject">Click here</Card.Link>
-          </Card.Footer>
-        </Card>
-      </div>
-      <br></br>
-      <div className="d-flex justify-content-around">
-        <Card style={{ width: "20rem", height: "16rem" }}>
-          <Card.Body>
-            <Card.Img variant="top" src="Ngo.jpg" />
-            <Card.Title>NGOs</Card.Title>
-            {/* <Card.Text>List of available NGOS.</Card.Text> */}
-          </Card.Body>
-          <Card.Footer>
-            <Card.Link href="/avlngo">Click here</Card.Link>
           </Card.Footer>
         </Card>
         <Card style={{ width: "20rem", height: "16rem" }}>
