@@ -1,9 +1,7 @@
-import React, { useContext,useState } from "react";
+import React, { useState } from "react";
 import { Navbar, Container, Dropdown, Button } from 'react-bootstrap';
 import { useLocation } from "react-router-dom";
 import logo from '../assets/gec.jpeg'
-import { ethers } from 'ethers';
-import { TransactionContext } from "../context/TransactionContext";
 
 export default function Header(props) {
     let history = useLocation();
@@ -12,7 +10,6 @@ export default function Header(props) {
     const {ethereum} = window
 
     const [currentAccount, setCurrentAccount] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
   
     const connectWallet = async () => {
       try {
@@ -21,11 +18,8 @@ export default function Header(props) {
         const accounts = await ethereum.request({ method: "eth_requestAccounts", });
   
         setCurrentAccount(accounts[0]);
-        // window.location.reload();
       } catch (error) {
-        console.log(error);
-  
-        throw new Error("No ethereum object");
+        alert("Unable to connect to your account");
       }
     };
   
@@ -50,7 +44,7 @@ export default function Header(props) {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#"
+                            <Dropdown.Item
                                 onClick={() => {
                                     props.setModalShow(true);
                                     props.setIsNgo(true);
@@ -58,10 +52,12 @@ export default function Header(props) {
                                     connectWallet()
                                 }}
                             >NGO</Dropdown.Item>
-                            <Dropdown.Item href="#" onClick={() => {
+                            <Dropdown.Item  onClick={() => {
                                 props.setModalDonor(true)
                                 props.setIsNgo(false)
+                                connectWallet()
                             }}>Donor</Dropdown.Item>
+                            <Dropdown.Item href="/ngoRegistration">Register Your NGO here</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>}
                 {pathname !== '/' && pathname !== '/donorRegistration' && pathname !== '/ngoRegistration' && <Button variant='danger'>Log Out</Button>}

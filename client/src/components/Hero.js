@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel, Card } from "react-bootstrap";
 import Header from "./Header";
-import NGOSignIn from "./NGOSignIn";
-import DonorSignIn from "./DonorSignIn";
 
 function Hero({ isNgo, setIsNgo }) {
   const [modalShow, setModalShow] = useState(false);
@@ -14,13 +12,8 @@ function Hero({ isNgo, setIsNgo }) {
         setModalShow={setModalShow}
         setModalDonor={setModalDonor}
         setIsNgo={setIsNgo}
-      />
-      <NGOSignIn
-        show={modalShow}
         isNgo={isNgo}
-        onHide={() => setModalShow(false)}
       />
-      <DonorSignIn show={modalDonor} onHide={() => setModalDonor(false)} />
       <Carousel fade>
         <Carousel.Item>
           <img className="d-block w-100" src="ngo.png" alt="First slide" />
