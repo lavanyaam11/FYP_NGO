@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Stack,
@@ -6,8 +6,15 @@ import {
   Table,
 } from "react-bootstrap";
 import NavBar from "./NavBar";
+import { getRequest,voteForRequest } from '../../utils/Ngo'
 
 export default function ApproveReject() {
+  const [listOfRequest, setListOfRequest] = useState([]);
+  useEffect(() => {
+    getRequest(setListOfRequest)
+  }, []);
+
+  console.log(listOfRequest)
   return (
     <>
       <NavBar></NavBar>
@@ -16,149 +23,32 @@ export default function ApproveReject() {
         <Table bordered hover>
           <thead className='text-center'>
             <tr>
-              <th>#</th>
               <th>NGO Name</th>
               <th>Wallet Address</th>
               <th>Cause Name</th>
               <th>Amount Required</th>
               <th>Description</th>
-              <th>Approve/Reject</th>
+              <th>Approve Request</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Smile Foundation</td>
-              <td>wert234shjitjk</td>
-              <td>Education</td>
-              <td>120 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td>
-                {" "}
-                <Stack direction="horizontal" gap={3}>
-                  <Button variant="outline-success">Approve</Button>
-                  <div className="vr" />
-                  <Button variant="outline-danger">Reject</Button>
-                </Stack>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Give India Foundation</td>
-              <td>1wcfgmjksldjun</td>
-              <td>Covid-19</td>
-              <td>130 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td>
-                {" "}
-                <Stack direction="horizontal" gap={3}>
-                  <Button variant="outline-success">Approve</Button>
-                  <div className="vr" />
-                  <Button variant="outline-danger">Reject</Button>
-                </Stack>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Care India</td>
-              <td>carpoytg567vfrt</td>
-              <td>Girl Eduaction</td>
-              <td>100 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td>
-                {" "}
-                <Stack direction="horizontal" gap={3}>
-                  <Button variant="outline-success">Approve</Button>
-                  <div className="vr" />
-                  <Button variant="outline-danger">Reject</Button>
-                </Stack>
-              </td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>Smile Foundation</td>
-              <td>wert234shjitjk</td>
-              <td>Education</td>
-              <td>120 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td>
-                {" "}
-                <Stack direction="horizontal" gap={3}>
-                  <Button variant="outline-success">Approve</Button>
-                  <div className="vr" />
-                  <Button variant="outline-danger">Reject</Button>
-                </Stack>
-              </td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>Give India Foundation</td>
-              <td>1wcfgmjksldjun</td>
-              <td>Covid-19</td>
-              <td>130 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td>
-                {" "}
-                <Stack direction="horizontal" gap={3}>
-                  <Button variant="outline-success">Approve</Button>
-                  <div className="vr" />
-                  <Button variant="outline-danger">Reject</Button>
-                </Stack>
-              </td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>Care India</td>
-              <td>carpoytg567vfrt</td>
-              <td>Girl Eduaction</td>
-              <td>100 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td>
-                {" "}
-                <Stack direction="horizontal" gap={3}>
-                  <Button variant="outline-success">Approve</Button>
-                  <div className="vr" />
-                  <Button variant="outline-danger">Reject</Button>
-                </Stack>
-              </td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>Smile Foundation</td>
-              <td>wert234shjitjk</td>
-              <td>Education</td>
-              <td>120 Ether</td>
-              <td>
-                voluntary group or institution with a social mission, which
-                operates independently from the government
-              </td>
-              <td>
-                {" "}
-                <Stack direction="horizontal" gap={3}>
-                  <Button variant="outline-success">Approve</Button>
-                  <div className="vr" />
-                  <Button variant="outline-danger">Reject</Button>
-                </Stack>
-              </td>
-            </tr>
+            {listOfRequest.map((eachRequest, index) => {
+              if (index % 2 === 0) {
+                return (
+                  <tr>
+                    <td>{eachRequest[0]}</td>
+                    <td>{eachRequest[1]}</td>
+                    <td>{eachRequest[2]}</td>
+                    <td>{eachRequest[3]}</td>
+                    <td>{parseInt(eachRequest[4])}</td>
+                    <td>
+                        <Button variant="outline-success" onClick={()=>{voteForRequest(0)}}>Approve</Button>
+                    </td>
+                  </tr>)
+              } else {
+                return (null)
+              }
+            })}
           </tbody>
         </Table>
       </Container>

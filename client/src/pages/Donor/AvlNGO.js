@@ -18,6 +18,10 @@ export default function AvlNGO() {
     setSelectedCauseName(causeName);
     setmodalisopen(true);
   };
+  const disableButton = (numberOfVote,amountRequired,amountCollected) => {
+    return numberOfVote > 5 && amountRequired <= amountCollected
+  }
+  console.log(disableButton(1,30,30))
   return (
     <>
       <NavBar></NavBar>
@@ -56,7 +60,12 @@ export default function AvlNGO() {
                     <td>{parseInt(eachRequest[4])}</td>
                     <td>{parseInt(eachRequest[5])}</td>
                     <td setModalIsOpen={setmodalisopen}>
-                      <button onClick={() => setModalIsOpenToTrue(org, cause)}>Donate</button>
+                      <button 
+                      onClick={() => setModalIsOpenToTrue(org, cause)}
+                      disabled={disableButton(parseInt(eachRequest[6]),parseInt(eachRequest[4]),parseInt(eachRequest[5]))}
+                      >
+                        Donate
+                      </button>
                       <Donate show={modalIsOpen}
                         onHide={() => setmodalisopen(false)}
                         orgname={selectedOrg}
