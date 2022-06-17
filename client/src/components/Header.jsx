@@ -14,9 +14,10 @@ export default function Header(props) {
     const connectNgoWallet = async () => {
         try {
             if (!ethereum) return alert("Please install MetaMask.");
+            const isNgo = await checkIsNgo()
+            console.log(isNgo)
+            if(isNgo) {
 
-            const accounts = await ethereum.request({ method: "eth_requestAccounts", });
-            if (checkIsNgo()) {
                 navigate('/ngo');
             } else {
                 alert("Your wallet is not yet registered as ngo")

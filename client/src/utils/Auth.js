@@ -20,5 +20,5 @@ export const checkIsNgo = async() => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(authTokenAddress, auth.abi,signer);
     const logoutUser = await contract.checkIsNgoRegistered(account);
-    console.log(logoutUser)
+    return logoutUser;
 }

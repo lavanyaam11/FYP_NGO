@@ -13,8 +13,6 @@ export default function ApproveReject() {
   useEffect(() => {
     getRequest(setListOfRequest)
   }, []);
-
-  console.log(listOfRequest)
   return (
     <>
       <NavBar></NavBar>
