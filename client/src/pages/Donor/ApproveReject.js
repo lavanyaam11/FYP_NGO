@@ -40,7 +40,7 @@ export default function ApproveReject() {
                     <td>{eachRequest[3]}</td>
                     <td>{parseInt(eachRequest[4])}</td>
                     <td>
-                        <Button variant="outline-success" onClick={()=>{voteForRequest()}}>Approve</Button>
+                        <Button variant="outline-success" onClick={()=>{voteForRequest(Math.ceil(index/2))}}>Approve</Button>
                     </td>
                   </tr>)
               } else {

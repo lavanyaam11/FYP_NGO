@@ -77,9 +77,9 @@ export async function voteForRequest(index){
   if (typeof window.ethereum !== 'undefined') {
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(tokenAddress, donation.abi, signer)
+    const contract = new ethers.Contract(tokenAddress, donation.abi, signer);
     try{
-      const data = await contract.voteForRequest(index)
+      const data = await contract.voteForRequest(index);
     }catch{
       alert("You have already voted for this request")
     }
