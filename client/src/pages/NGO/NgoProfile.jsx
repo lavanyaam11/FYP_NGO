@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Card, Button, Modal } from 'react-bootstrap'
 
 export default function NGOProfile(props) {
+    const [orgAddress, setWallet] = useState("");
     const navigate = useNavigate();
     const onClickHandler = () => {
         navigate('/ngo');
         props.onHide();
     }
+    const getWalletAddress = async () => {
+        const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setWallet(account)
+    }
+    getWalletAddress();
     return (
         <Modal
             {...props}
@@ -25,6 +31,7 @@ export default function NGOProfile(props) {
                     <Card.Body>
                         <p>NGO Name</p>
                         <p>Wallet Address</p>
+                        {orgAddress}
                     </Card.Body>
                 </Card>
                 <br/>

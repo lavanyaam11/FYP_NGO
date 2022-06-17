@@ -1,3 +1,3 @@
 // export const tokenAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-export const tokenAddress = "0xcA1A8216a07Ea35284697E6a49703A3a595e6F15";
-export const authTokenAddress = "0x4cf6e9522354D1DD1ffF611285dc8aeA2C17409C";
+export const tokenAddress = "0xE9EdDbB72aFf3084e240822161d24244e38c0671";
+export const authTokenAddress = "0x565e6ffdE55E6655F291610de4D5843089Be13Ad";

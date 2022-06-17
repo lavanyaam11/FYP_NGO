@@ -19,9 +19,9 @@ export default function AvlNGO() {
     setmodalisopen(true);
   };
   const disableButton = (numberOfVote,amountRequired,amountCollected) => {
-    return numberOfVote > 5 && amountRequired <= amountCollected
+    return (numberOfVote < 3 && amountRequired === null) || (numberOfVote > 7 && amountRequired === amountCollected)
   }
-  console.log(disableButton(1,30,30))
+  console.log(disableButton())
   return (
     <>
       <NavBar></NavBar>
