@@ -24,8 +24,8 @@ export default function ApproveReject() {
               <th>NGO Name</th>
               <th>Wallet Address</th>
               <th>Cause Name</th>
-              <th>Amount Required</th>
               <th>Description</th>
+              <th>Amount Required</th>
               <th>Approve Request</th>
             </tr>
           </thead>
@@ -40,7 +40,7 @@ export default function ApproveReject() {
                     <td>{eachRequest[3]}</td>
                     <td>{parseInt(eachRequest[4])}</td>
                     <td>
-                        <Button variant="outline-success" onClick={()=>{voteForRequest(0)}}>Approve</Button>
+                        <Button variant="outline-success" onClick={()=>{voteForRequest()}}>Approve</Button>
                     </td>
                   </tr>)
               } else {

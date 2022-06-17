@@ -22,3 +22,12 @@ export const checkIsNgo = async() => {
     const logoutUser = await contract.checkIsNgoRegistered(account);
     return logoutUser;
 }
+
+export const getNgoName = async() =>{
+    const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(authTokenAddress, auth.abi,signer);
+    const ngoName = await contract.user(account);
+    return ngoName[1];
+}

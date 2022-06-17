@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Card, Button, Modal } from 'react-bootstrap'
+import { getNgoName } from '../../utils/Auth'
 
 export default function NGOProfile(props) {
+    const [orgAddress, setWallet] = useState("");
+    const [ngoName, setNgoName] = useState("");
     const navigate = useNavigate();
     const onClickHandler = () => {
         navigate('/ngo');
         props.onHide();
     }
+    const getWalletAddress = async () => {
+        const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setWallet(account)
+        const name = await getNgoName()
+        setNgoName(name);
+    }
+    getWalletAddress();
+
     return (
         <Modal
             {...props}
@@ -23,15 +34,21 @@ export default function NGOProfile(props) {
             <Modal.Body>
                 <Card>
                     <Card.Body>
-                        <p>NGO Name</p>
-                        <p>Wallet Address</p>
+                        <Card.Text>
+                            <p>NGO Name</p>
+                            {ngoName}
+                        </Card.Text>
+                        <Card.Text>
+                            <p>Wallet Address</p>
+                            {orgAddress}
+                        </Card.Text>
                     </Card.Body>
                 </Card>
-                <br/>
+                <br />
                 <Button variant="danger" type="submit" onClick={onClickHandler}>
                     Cancel
                 </Button>
-                <br/>
+                <br />
             </Modal.Body>
         </Modal>
     )
